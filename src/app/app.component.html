@@ -1,0 +1,45 @@
+<div class="vectors">
+  <div class="buttons">
+      <div class="value-group">
+          <span>degree</span>
+          <label for="degree">
+              <div class="minus" (click)="plus(degree, -1)"></div>
+              <input id="degree" type="number" placeholder="degree" value="100" #degree>
+              <div class="plus" (click)="plus(degree, 1)"></div>
+          </label>
+      </div>
+      <div class="value-group">
+          <span>size</span>
+          <label for="size">
+              <div class="minus" (click)="plus(size, -1)"></div>
+              <input id="size" type="number" min="0" max="300" placeholder="size" value="100" #size>
+              <div class="plus" (click)="plus(size, 1)"></div>
+          </label>
+      </div>
+      <button (click)="addVector(degree, size)">add line</button>
+      <button (click)="getComponents()">get components</button>
+      <button (click)="getResultant()">get resultant</button>
+      <ul class="vectors__list">
+          <li *ngFor="let v of vectors">
+              size: {{v.size}}; degree: {{ v.direction }} <button (click)="remove(v.id)">x</button>
+          </li>
+          <ng-container *ngFor="let c of components" >
+              <li>size: {{c.Fx.size}}; degree: {{ c.Fx.degree }}<button (click)="remove(c.id)">x</button></li>
+              <li>size: {{c.Fy.size}}; degree: {{ c.Fy.degree }}<button (click)="remove(c.id)">x</button></li>
+          </ng-container>
+          <li *ngIf="hasResultant" >
+              resultant - size: {{resultant.size}}; degree: {{ resultant.degree }} <button (click)="remove(100)">x</button>
+          </li>
+      </ul>
+  </div>
+  <div class="container">
+      <div class="graph" #graph>
+          <div class="line" *ngFor="let v of vectors" [style.width.px]='v.size'  [style.transform]='"translateX(50%) rotate("+ -v.direction+"deg)"' ></div>
+          <ng-container *ngFor="let c of components">
+              <div class="line component" [style.width.px]='abs(c.Fx.size)'  [style.transform]='"translateX(50%) rotate("+ -c.Fx.degree+"deg)"'></div>
+              <div class="line component" [style.width.px]='abs(c.Fy.size)'  [style.transform]='"translateX(50%) rotate("+ -c.Fy.degree+"deg)"'></div>
+          </ng-container>
+          <div class="line resultant" *ngIf="hasResultant" [style.width.px]='resultant.size' [style.transform]='"translateX(50%) rotate("+ -resultant.degree+"deg)"'></div>
+      </div>
+  </div>
+</div>

@@ -1,0 +1,152 @@
+.vectors{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    &__list{
+        position: absolute;
+        left: 0;
+    }
+}
+.graph{
+    width: 500px;
+    height: 500px;
+    position: relative;
+    background: url('../assets/hip-square.png') repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.graph::before{
+    content: '';
+    position: absolute;
+    top: 50%;
+    height: 1px;
+    width: 100%;
+    background: black;
+}
+
+.graph::after{
+    content: '';
+    position: absolute;
+    left: 50%;
+    height: 100%;
+    width: 1px;
+    background-color: #000;
+}
+
+.line{
+    position: absolute;
+    transform-origin: top left;
+    height: 1px;
+    width: var(--width);
+    transform: translateX(50%) rotate(var(--degree));
+    background-color: #000;
+    z-index: 4;
+    &.component{
+        background: brown;
+        &::after{
+            background: brown;
+        }
+        &::before{
+            background: brown;
+        }
+    }
+    &::after{
+        background: black;
+    }
+    &::before{
+        background: black;
+    }
+    
+}
+.line::after, .line::before{
+    content: '';
+    position: absolute;
+    width: 3px;
+    height: 1px;
+    background: #000;
+    right: 0px;
+    transform-origin: top right;
+}
+.line::after{
+    transform: rotate(-25deg)
+}
+.line::before{
+    transform: rotate(25deg)
+}
+
+.resultant{
+    height: 2px;
+    background: red;
+    &::before{
+        background: red;
+    }
+    &::after{
+        background: red;
+    }
+}
+.buttons{
+    display: flex;
+    flex-direction: column;
+    button{
+        all: unset;
+        margin: 5px 0px;
+        padding: 12px 18px;
+        border-radius: 22px;
+        border: 1px solid black;
+        cursor: pointer;
+        z-index: 6;
+    }
+}
+label{
+    width: max-content;
+    padding: 0px 0px;
+    margin: 12px 0 12px 12px;
+    border-radius: 22px;
+    border: 1px solid black;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    z-index: 6;
+    cursor: pointer;
+    .plus, .minus{
+        width: 18px;
+        height: 42px;
+    }
+    .plus{
+        border-left: 1px solid black;
+        &::before{
+            content: '+';
+            position: absolute;
+            transform: translate(3px, 12px );
+        }
+    }
+    .minus{
+        border-right: 1px solid black;
+        &::before{
+            content: '-';
+            position: absolute;
+            transform: translate(6px, 12px );
+        }
+    }
+}
+.value-group{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button{
+        -webkit-appearance: none;
+        margin: 0;
+    }
+    input[type=number] {
+        -moz-appearance: textfield;
+    }
+    input{
+        border: none;
+        text-indent: 4px;
+    }
+}
